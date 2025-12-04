@@ -40,8 +40,8 @@ antes de guardarlas, así solo se guardan nuevas, lo que también demora la ejec
 domain = ['eltiempo.com', 'elespectador.com', 'noticiasrcn.com', 'semana.com', 'pulzo.com', 'larepublica.co', 'lasillavacia.com'] 
 
 # Emparejamos inicio con final de mes; formato YYYYMMDDHHMMSS
-start = ['20240101000000', '20240201000000', '20240301000000', '20240401000000', '20240501000000', '20240601000000', '20240701000000', '20240801000000', '20240901000000', '20241001000000', '20241101000000', '20241201000000'] 
-end = ['20240103000000', '20240228000000', '20240330000000', '20240430000000', '20240530000000', '20240630000000', '20240703000000', '20240830000000', '20240930000000', '20241030000000', '20241130000000', '20241230000000'] 
+start = ['20220101000000', '20220201000000', '20220301000000', '20220401000000', '20220501000000', '20220601000000', '20220701000000', '20220801000000', '20220901000000', '20221001000000', '20221101000000', '20221201000000'] 
+end = ['20220103000000', '20220228000000', '20220330000000', '20220430000000', '20220530000000', '20220630000000', '20220703000000', '20220830000000', '20220930000000', '20221030000000', '20221130000000', '20221230000000'] 
 
 
 # Variables internas
@@ -49,7 +49,7 @@ base_url = 'https://api.gdeltproject.org/api/v2/doc/doc'
 seen_urls = set()  # para evitar duplicados|
 all_data = []
 
-output_csv = 'stores/gdelt_colombia_2024.csv' # Archivo final de esta parte
+output_csv = 'stores/gdelt_colombia_2022.csv' # Archivo final de esta parte
 
 
 # Ejemplo uso para 2022 (colombia, noticiero "pulzo.com", en español, entre enero 1 - diciembre 30)
@@ -103,7 +103,7 @@ for j in range(len(domain)):
         
         # Ajustar el rango de fechas dinámicamente
         extraer_y_guardar(domain[j], start[k], end[k])
-        time.sleep(1)  # Esperar 1 segundo entre peticiones para evitar errores de límite
+
 
 
 
