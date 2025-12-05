@@ -53,25 +53,49 @@ plt.tight_layout()
 plt.savefig("figures/IPEC_comparison_el_tiempo_2022_2024.png")
 
 # Plot 3 - Newspaper Shares Stacked Area Chart
+
+colors = {
+    "elespectador.com": "#ff9999",   
+    "blogs.elespectador.com": "#ff9999",
+
+    "eltiempo.com": "#003f7f",      
+    "blogs.eltiempo.com": "#18b9dd",
+    "citytv.eltiempo.com": "#f18f18",
+
+    "larepublica.co": "#7f0000",     
+
+    "noticiasrcn.com": "#45dd3d",    
+    "especiales.noticiasrcn.com": "#009e9e",
+
+    "pulzo.com": "#ff66cc",         
+
+    "semana.com": "#cc0000",         
+}
+
+def get_color_list(df):
+    return [colors.get(col, "#bbbbbb") for col in df.columns]  # fallback = gray
+
+
 plt.clf()
 df = pd.read_csv("stores/newspapers_shares.csv")
 
 df["year_month"] = pd.to_datetime(df["year_month"])
-
-# Set index
 df = df.set_index("year_month")
 
-# Normalize each row to 100% (share)
+# Normalize to row shares (percentages)
 shares = df.div(df.sum(axis=1), axis=0) * 100
 
-# Plot
 plt.figure(figsize=(14, 7))
-plt.stackplot(shares.index, shares.T, labels=shares.columns)
+plt.stackplot(
+    shares.index,
+    shares.T,
+    labels=shares.columns,
+    colors=get_color_list(shares)
+)
 
 plt.title("Monthly Newspaper Shares")
 plt.ylabel("Share (%)")
 plt.xlabel("Month")
-
 plt.xticks(rotation=45)
 plt.ylim(0, 100)
 
@@ -81,7 +105,36 @@ plt.tight_layout()
 plt.savefig("figures/newspaper_shares_stacked_area.png")
 
 
-# Plot 4 - Monthly Sector Distribution Stacked Bar Charts
+# Plot 4 - Newspaper Shares IPEC Stacked Area Chart
+plt.clf()
+df = pd.read_csv("stores/newspapers_shares_IPEC_selected.csv")
+
+df["year_month"] = pd.to_datetime(df["year_month"])
+df = df.set_index("year_month")
+
+# Normalize to row shares (percentages)
+shares = df.div(df.sum(axis=1), axis=0) * 100
+
+plt.figure(figsize=(14, 7))
+plt.stackplot(
+    shares.index,
+    shares.T,
+    labels=shares.columns,
+    colors=get_color_list(shares)
+)
+
+plt.title("Monthly Newspaper Shares (IPEC-selected articles)")
+plt.ylabel("Share (%)")
+plt.xlabel("Month")
+plt.xticks(rotation=45)
+plt.ylim(0, 100)
+
+plt.legend(loc="upper left", bbox_to_anchor=(1, 1))
+plt.tight_layout()
+
+plt.savefig("figures/newspaper_shares_IPEC_selected_stacked_area.png")
+
+# Plot 5 - Monthly Sector Distribution Stacked Bar Charts
 plt.clf()
 df = pd.read_csv("stores/IPEC_sector_monthly_counts.csv")
 
@@ -153,7 +206,7 @@ fig.suptitle("Distribución mensual por sector de noticias de incertidumbre (202
 plt.tight_layout()
 plt.savefig("figures/monthly_sector_distribution_stacked_bars.png")
 
-# Graph 5 - Annual Sector Distribution Stacked Bar Chart
+# Plot 6 - Annual Sector Distribution Stacked Bar Chart
 
 df_pct["year"] = df_pct["year_month"].dt.year
 df_year = df_pct.groupby("year")[main_sectors].sum()
