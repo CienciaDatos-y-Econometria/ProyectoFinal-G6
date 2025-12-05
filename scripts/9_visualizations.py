@@ -55,7 +55,7 @@ plt.savefig("figures/IPEC_comparison_el_tiempo_2022_2024.png")
 # Plot 3 - Newspaper Shares Stacked Area Chart
 
 colors = {
-    "elespectador.com": "#ff9999",   
+    "elespectador.com": "#f53b3b",   
     "blogs.elespectador.com": "#ff9999",
 
     "eltiempo.com": "#003f7f",      
