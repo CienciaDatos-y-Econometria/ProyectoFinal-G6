@@ -1,0 +1,1 @@
+# Permite ver que periodicos son mas "sensacionalistas", o difunden más incertidumbre 
