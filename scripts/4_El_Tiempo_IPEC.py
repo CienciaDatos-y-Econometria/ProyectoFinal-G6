@@ -42,6 +42,10 @@ def clean_text(text):
 df["clean"] = df["titulo"].fillna("") + " " + df["texto"].fillna("") # Combine title and text
 df["clean"] = df["clean"].apply(clean_text)
 
+print(f"Total articles before filtering: {len(df)}")
+df = df[df["url"].str.contains("eltiempo", na=False)]
+print(f"Total articles after filtering to El Tiempo: {len(df)}")
+
 def contains_any(text, keywords):
     return any(kw in text for kw in keywords)
 
@@ -79,4 +83,4 @@ monthly_counts["IPEC"] = monthly_counts["ipec_std"] * fede_std + fede_mean
 
 # Final index
 ipec = monthly_counts["IPEC"].to_frame()
-ipec.reset_index().to_csv("stores/IPEC_monthly_index.csv", index=False)
+ipec.reset_index().to_csv("stores/IPEC_monthly_index_el_tiempo.csv", index=False)
