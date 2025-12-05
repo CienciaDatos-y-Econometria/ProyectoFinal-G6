@@ -1,5 +1,4 @@
 """
-
 Notas pa ordenar mi cabeza:
 - Sacamos todas las noticias SIN el tiempo por web scrapping
 - Añadimos las que son del tiempo para cada año (que usó FEDESARROLLO); bien formateadas y pegadas

@@ -1,4 +1,3 @@
-
 import pandas as pd
 from newspaper import Article, news_pool
 
